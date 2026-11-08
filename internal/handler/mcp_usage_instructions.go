@@ -92,7 +92,7 @@ func (h *MCPServiceHandler) GenerateMCPUsageInstructions(c *gin.Context) {
 	language := map[string]string{
 		"zh-CN": "Simplified Chinese", "zh-TW": "Traditional Chinese",
 		"en-US": "English", "ja-JP": "Japanese",
-		"ko-KR": "Korean", "ru-RU": "Russian",
+		"ko-KR": "Korean", "ru-RU": "Russian", "vi-VN": "Vietnamese",
 	}[req.Language]
 	if language == "" {
 		language = "Simplified Chinese"

@@ -14,6 +14,9 @@ templates:
       ko-KR:
         name: "순수 에이전트"
         description: "순수 에이전트 모드용 시스템 프롬프트 (지식 베이스 미사용)"
+      vi-VN:
+        name: "Agent thuần"
+        description: "System Prompt cho chế độ Agent thuần (không dùng Knowledge Base)"
       ja-JP:
         name: "ピュアエージェント"
         description: "ピュアエージェントモード用のシステムプロンプト（ナレッジベース不使用）"
@@ -36,6 +39,9 @@ templates:
       ko-KR:
         name: "프로그레시브 RAG 에이전트"
         description: "지식 베이스를 사용하는 프로그레시브 에이전틱 RAG 모드용 시스템 프롬프트"
+      vi-VN:
+        name: "Agent RAG lũy tiến"
+        description: "System Prompt cho chế độ Agentic RAG lũy tiến có dùng Knowledge Base"
       ja-JP:
         name: "プログレッシブRAGエージェント"
         description: "ナレッジベースを使用するプログレッシブエージェンティックRAGモード用のシステムプロンプト"
@@ -63,6 +69,9 @@ templates:
       ko-KR:
         name: "데이터 분석가"
         description: "DuckDB SQL 분석을 사용하는 데이터 분석 에이전트용 시스템 프롬프트"
+      vi-VN:
+        name: "Chuyên viên phân tích dữ liệu"
+        description: "System Prompt cho Agent phân tích dữ liệu bằng DuckDB SQL"
       ja-JP:
         name: "データアナリスト"
         description: "DuckDB SQLを用いた分析を行うデータ分析エージェント用のシステムプロンプト"
@@ -90,6 +99,9 @@ templates:
       ko-KR:
         name: "위키 연구원"
         description: "지식 그래프 탐색 기능이 있는 위키 연구원 에이전트용 시스템 프롬프트"
+      vi-VN:
+        name: "Nhà nghiên cứu Wiki"
+        description: "System Prompt cho Agent nghiên cứu Wiki, có khả năng duyệt Knowledge Graph"
       ja-JP:
         name: "Wikiリサーチャー"
         description: "ナレッジグラフ探索を行うWikiリサーチャーエージェント用のシステムプロンプト"
@@ -226,6 +238,9 @@ templates:
       ko-KR:
         name: "하이브리드 RAG + 위키 에이전트"
         description: "Wiki와 벡터/키워드 인덱스가 동시에 활성화된 지식 베이스에서 사용하는 시스템 프롬프트"
+      vi-VN:
+        name: "Agent kết hợp RAG + Wiki"
+        description: "System Prompt cho Knowledge Base bật đồng thời Wiki và truy xuất theo chunk"
       ja-JP:
         name: "ハイブリッドRAG + Wikiエージェント"
         description: "Wikiとチャンク単位の検索を同時に有効化したナレッジベース用のシステムプロンプト"

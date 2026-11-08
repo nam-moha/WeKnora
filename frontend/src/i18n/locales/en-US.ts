@@ -5699,6 +5699,7 @@ export default {
       ruRU: 'Русский',
       koKR: '한국어',
       jaJP: '日本語',
+      viVN: 'Tiếng Việt',
       selectLanguage: 'Select Language',
       language: 'Language',
       languageDescription: 'Select interface display language',
@@ -8350,6 +8351,23 @@ export default {
       importInProgress: 'Import is in progress, please wait for it to complete',
       noFailedRecords: 'No failed records available for download'
     }
+  },
+  mindmap: {
+    badge: 'Mind map',
+    fit: 'Fit',
+    tab: 'Mindmap',
+    tabTip: 'Mind map built from the Wiki: an overview by page type and folder, or one page in detail',
+    overview: 'Overview',
+    byPage: 'By page',
+    pickPage: 'Pick a Wiki page',
+    level: 'Expand {n} levels',
+    levelAll: 'Expand all',
+    openInWiki: 'Open in Wiki',
+    loading: 'Building mind map…',
+    empty: 'The Wiki has no pages yet',
+    links: 'Links to',
+    backlinks: 'Linked from',
+    hint: 'Click a page name (coloured text) to map that page; click a dot to fold or unfold a branch; scroll to zoom.',
   },
   mermaid: {
     diagram: 'Diagram',

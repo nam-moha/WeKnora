@@ -7,6 +7,7 @@ import koKR from './ko-KR.ts'
 import ruRU from './ru-RU.ts'
 import zhCN from './zh-CN.ts'
 import zhTW from './zh-TW.ts'
+import viVN from './vi-VN.ts'
 
 type LocaleValue = string | Record<string, unknown> | unknown[]
 
@@ -40,6 +41,7 @@ const localeChecks = [
   { name: 'ko-KR', locale: koKR, forbidden: /테넌트/ },
   { name: 'ja-JP', locale: jaJP, forbidden: /テナント/ },
   { name: 'ru-RU', locale: ruRU, forbidden: /(?:тенант|арендатор)/i },
+  { name: 'vi-VN', locale: viVN, forbidden: /(?:\btenants?\b|người thuê)/i },
 ]
 
 test('user-facing locale values use workspace terminology', () => {

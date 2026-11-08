@@ -9,6 +9,7 @@ import {
   highlightCodeBlocksInContainer,
   syncMermaidExpandButtons,
 } from '@/utils/markdownEnhancements'
+import { buildMarkmapBlockHtml, renderMarkmapInContainer } from '@/utils/markmapShared'
 
 hljs.registerAliases('mermaid', { languageName: 'plaintext' })
 
@@ -207,6 +208,9 @@ export const createMermaidCodeRenderer = (idPrefix: string) => {
       const inner = `<code class="hljs language-${highlightLang}">${highlighted}</code>`
       return buildMermaidBlockHtml(inner, `id="${id}" data-mermaid="false"`)
     }
+    if (lang === 'markmap') {
+      return buildMarkmapBlockHtml(text)
+    }
     return buildCodeBlockHtml(lang || highlightLang, highlighted, highlightLang)
   }
 }
@@ -279,6 +283,7 @@ export const renderMermaidInContainer = async (
       continue
     }
   }
+  await renderMarkmapInContainer(rootElement)
 }
 
 export async function enhanceMarkdownContainer(

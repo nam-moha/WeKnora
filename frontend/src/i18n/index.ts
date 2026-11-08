@@ -5,6 +5,7 @@ import enUS from './locales/en-US.ts'
 import koKR from './locales/ko-KR.ts'
 import jaJP from './locales/ja-JP.ts'
 import zhTW from './locales/zh-TW.ts'
+import viVN from './locales/vi-VN.ts'
 import { BUILT_IN_DEFAULT, resolveDefaultLocale } from './resolveDefaultLocale.ts'
 import { pluralRules } from './pluralizationRules.ts'
 
@@ -14,7 +15,8 @@ const messages = {
   'en-US': enUS,
   'ru-RU': ruRU,
   'ko-KR': koKR,
-  'ja-JP': jaJP
+  'ja-JP': jaJP,
+  'vi-VN': viVN
 }
 
 // User's explicit past choice wins; otherwise use the deployment default.
