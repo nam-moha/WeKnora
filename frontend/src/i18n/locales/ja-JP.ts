@@ -4797,6 +4797,7 @@ export default {
     ruRU: 'Русский',
     koKR: '한국어',
     jaJP: '日本語',
+    viVN: 'Tiếng Việt',
     selectLanguage: '言語を選択',
     language: '言語',
     languageDescription: 'インターフェースの表示言語を選択します',
@@ -6469,6 +6470,23 @@ export default {
       importInProgress: 'インポートを実行中です。完了までお待ちください',
       noFailedRecords: 'ダウンロードできる失敗レコードはありません'
     }
+  },
+  mindmap: {
+    badge: 'マインドマップ',
+    fit: '全体表示',
+    tab: 'マインドマップ',
+    tabTip: 'Wiki から生成したマインドマップ：ページ種別・フォルダ別の全体像、または各ページの詳細',
+    overview: '全体像',
+    byPage: 'ページ別',
+    pickPage: 'Wiki ページを選択',
+    level: '{n} 階層まで展開',
+    levelAll: 'すべて展開',
+    openInWiki: 'Wiki で開く',
+    loading: 'マインドマップを作成中…',
+    empty: 'Wiki にページがありません',
+    links: 'リンク先',
+    backlinks: '被リンク',
+    hint: 'ページ名（色付き文字）をクリックするとそのページのマップを表示。丸をクリックで枝の開閉、スクロールで拡大縮小。',
   },
   mermaid: {
     diagram: '図',

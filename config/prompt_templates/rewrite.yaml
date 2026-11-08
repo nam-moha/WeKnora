@@ -16,6 +16,9 @@ templates:
       ko-KR:
         name: "표준 재작성 (의도 분류 포함)"
         description: "질문 재작성, 의도 분류 및 이미지/첨부 파일 분석을 포함한 기본 템플릿"
+      vi-VN:
+        name: "Viết lại chuẩn (kèm phân loại ý định)"
+        description: "Template mặc định gồm viết lại câu hỏi, phân loại ý định và phân tích hình ảnh/tệp đính kèm"
       ja-JP:
         name: "標準リライト（意図分類あり）"
         description: "質問のリライト、意図分類、画像・添付ファイル分析を含むデフォルトのテンプレート"
@@ -143,6 +146,9 @@ templates:
       ko-KR:
         name: "표준 재작성"
         description: "참조를 제거하고 누락을 완료하기 위한 표준 재작성 규칙"
+      vi-VN:
+        name: "Viết lại chuẩn"
+        description: "Quy tắc chuẩn để giải quyết đại từ thay thế và bổ sung phần bị lược bỏ"
       ja-JP:
         name: "標準リライト"
         description: "指示語の解決と省略の補完を行う標準的なリライトルール"
@@ -185,6 +191,9 @@ templates:
       ko-KR:
         name: "엄격하게 다시 작성됨"
         description: "문제가 완전하고 독립적인지 확인하기 위해 더 엄격한 재작성 요구 사항"
+      vi-VN:
+        name: "Viết lại nghiêm ngặt"
+        description: "Yêu cầu nghiêm ngặt hơn để câu hỏi đầy đủ và độc lập"
       ja-JP:
         name: "厳格なリライト"
         description: "質問の完全性と独立性をより厳密に確保するリライト要件"

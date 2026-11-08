@@ -16,6 +16,9 @@ templates:
       ko-KR:
         name: "인사 응답"
         description: "인사 의도에 대한 시스템 프롬프트"
+      vi-VN:
+        name: "Phản hồi lời chào"
+        description: "System Prompt cho ý định chào hỏi"
       ja-JP:
         name: "挨拶への応答"
         description: "挨拶の意図に対するシステムプロンプト"
@@ -40,6 +43,9 @@ templates:
       ko-KR:
         name: "잡담 응답"
         description: "일상적인 대화를 위한 시스템 프롬프트"
+      vi-VN:
+        name: "Phản hồi trò chuyện phiếm"
+        description: "System Prompt cho trò chuyện thông thường"
       ja-JP:
         name: "雑談への応答"
         description: "雑談の意図に対するシステムプロンプト"
@@ -66,6 +72,9 @@ templates:
       ko-KR:
         name: "후속 응답"
         description: "대화 기록을 참조하는 후속 질문에 대한 시스템 프롬프트"
+      vi-VN:
+        name: "Phản hồi câu hỏi tiếp nối"
+        description: "System Prompt cho câu hỏi tiếp nối có tham chiếu lịch sử hội thoại"
       ja-JP:
         name: "追加質問への応答"
         description: "会話履歴を参照する追加質問に対するシステムプロンプト"
@@ -92,6 +101,9 @@ templates:
       ko-KR:
         name: "이미지 분석 응답"
         description: "순수 이미지 이해 의도를 위한 시스템 프롬프트"
+      vi-VN:
+        name: "Phản hồi phân tích hình ảnh"
+        description: "System Prompt cho ý định chỉ hiểu nội dung hình ảnh"
       ja-JP:
         name: "画像分析への応答"
         description: "画像のみを理解する意図に対するシステムプロンプト"
@@ -117,6 +129,9 @@ templates:
       ko-KR:
         name: "요약 응답"
         description: "대화 요약 의도를 위한 시스템 프롬프트"
+      vi-VN:
+        name: "Phản hồi tóm tắt"
+        description: "System Prompt cho ý định tóm tắt hội thoại"
       ja-JP:
         name: "要約への応答"
         description: "会話要約の意図に対するシステムプロンプト"
@@ -142,6 +157,9 @@ templates:
       ko-KR:
         name: "웹 검색 불가 응답"
         description: "웹 검색 의도가 감지되었지만 웹 검색이 활성화되지 않은 경우의 시스템 프롬프트"
+      vi-VN:
+        name: "Phản hồi khi không có tìm kiếm web"
+        description: "System Prompt khi phát hiện ý định tìm kiếm web nhưng tìm kiếm web chưa được bật"
       ja-JP:
         name: "Web検索利用不可の応答"
         description: "Web検索の意図を検出したがWeb検索が有効でない場合のシステムプロンプト"
@@ -170,6 +188,9 @@ templates:
       ko-KR:
         name: "문서 분석 응답"
         description: "순수 문서 이해 의도를 위한 시스템 프롬프트"
+      vi-VN:
+        name: "Phản hồi phân tích tài liệu"
+        description: "System Prompt cho ý định chỉ hiểu nội dung tài liệu"
       ja-JP:
         name: "ドキュメント分析への応答"
         description: "ドキュメントのみを理解する意図に対するシステムプロンプト"

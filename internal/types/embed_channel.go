@@ -133,6 +133,7 @@ var supportedEmbedLocales = map[string]struct{}{
 	"ko-KR": {},
 	"ja-JP": {},
 	"ru-RU": {},
+	"vi-VN": {},
 }
 
 // NormalizeEmbedDefaultLocale returns a supported locale tag or empty string

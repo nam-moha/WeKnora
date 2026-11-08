@@ -53,6 +53,7 @@ import type { KnowledgeProcessOverrides } from '@/types/knowledgeProcess';
 import { useUploadConfirmStore, type UploadConfirmResult } from '@/stores/uploadConfirm';
 import { useUploadTasksStore } from '@/stores/uploadTasks';
 import WikiBrowser from './wiki/WikiBrowser.vue';
+import WikiMindmap from './wiki/WikiMindmap.vue';
 import { getWikiStats } from '@/api/wiki';
 import {
   isKnowledgeParseInFlight,
@@ -81,7 +82,7 @@ const kbLoading = ref(false);
 const docListLoading = ref(true);
 const isFAQ = computed(() => (kbInfo.value?.type || '') === 'faq');
 const isWiki = computed(() => !!kbInfo.value?.indexing_strategy?.wiki_enabled);
-const validTabs = ['documents', 'wiki', 'graph'] as const
+const validTabs = ['documents', 'wiki', 'graph', 'mindmap'] as const
 type KbTab = typeof validTabs[number]
 const initTab = validTabs.includes(route.query.tab as any) ? (route.query.tab as KbTab) : 'documents'
 const activeKbTab = ref<KbTab>(initTab);
@@ -106,6 +107,10 @@ const onViewWikiInGraph = async (slug: string) => {
   // (which spreads route.query) preserves slug instead of clobbering it.
   await router.replace({ query: { ...route.query, tab: 'graph', slug } })
   activeKbTab.value = 'graph'
+}
+const onOpenWikiFromMindmap = async (slug: string) => {
+  await router.replace({ query: { ...route.query, tab: 'wiki', slug } })
+  activeKbTab.value = 'wiki'
 }
 
 let wikiStatusTimer: ReturnType<typeof setInterval> | null = null
@@ -2176,6 +2181,13 @@ const handleKBEditorSuccess = (kbIdValue: string) => {
                     </t-tooltip>
                   </span>
                 </t-tooltip>
+                <span class="breadcrumb-tab-sep">/</span>
+                <t-tooltip :content="$t('mindmap.tabTip')" placement="bottom">
+                  <span :class="['breadcrumb-tab', { active: activeKbTab === 'mindmap' }]"
+                    @click="activeKbTab = 'mindmap'">
+                    {{ $t('mindmap.tab') }}
+                  </span>
+                </t-tooltip>
               </template>
               <span v-else class="breadcrumb-current">{{ $t('knowledgeEditor.document.title') }}</span>
             </h2>
@@ -2212,6 +2224,10 @@ const handleKBEditorSuccess = (kbIdValue: string) => {
         <WikiBrowser v-if="kbId" :knowledge-base-id="kbId" :view="activeKbTab === 'graph' ? 'graph' : 'browser'"
           :can-edit="canEdit" @open-source-doc="openSourceDoc" @status-change="onWikiStatusChange"
           @view-graph="onViewWikiInGraph" />
+      </div>
+      <div v-if="isWiki && activeKbTab === 'mindmap'" class="wiki-main-area">
+        <WikiMindmap v-if="kbId" :knowledge-base-id="kbId" :kb-name="kbInfo?.name"
+          @open-wiki="onOpenWikiFromMindmap" />
       </div>
 
       <template v-if="activeKbTab === 'documents' || !isWiki">
