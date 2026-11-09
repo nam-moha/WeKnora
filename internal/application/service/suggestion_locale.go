@@ -61,11 +61,13 @@ func isVietnameseRune(r rune) bool {
 	return r >= 0x1EA0 && r <= 0x1EF9
 }
 
-// textScript classifies text by its dominant script: "latin" (plain Latin,
-// e.g. English or names), "vi", "zh", "ja", "ko", "ru", or "" (no letters).
+// textScript classifies text by its dominant script: "latin" (plain ASCII
+// letters, e.g. English or names), "latin-ext" (accented Latin that is not
+// specifically Vietnamese, e.g. "bàn giao"), "vi", "zh", "ja", "ko", "ru",
+// or "" (no letters).
 func textScript(s string) string {
 	var latin, han, kana, hangul, cyr int
-	viet := false
+	viet, accented := false, false
 	for _, r := range s {
 		switch {
 		case unicode.Is(unicode.Hiragana, r) || unicode.Is(unicode.Katakana, r):
@@ -80,6 +82,8 @@ func textScript(s string) string {
 			latin++
 			if isVietnameseRune(r) {
 				viet = true
+			} else if r > unicode.MaxASCII {
+				accented = true
 			}
 		}
 	}
@@ -93,6 +97,9 @@ func textScript(s string) string {
 	case latin >= cjk && latin >= hangul && latin >= cyr:
 		if viet {
 			return "vi"
+		}
+		if accented {
+			return "latin-ext"
 		}
 		return "latin"
 	case cjk >= hangul && cjk >= cyr:
@@ -108,27 +115,48 @@ func textScript(s string) string {
 }
 
 // suggestionMatchesLocale reports whether text can be shown to a UI in locale.
-// Plain Latin text (names, product terms, ASCII titles) fits every UI; other
-// scripts must match the UI language. Japanese UIs also accept kanji-only text.
+// Plain ASCII names and terms fit every UI, but an ASCII sentence that reads
+// as English is shown only to English UIs. Accented Latin is treated as
+// Vietnamese (the only accented Latin UI language). Japanese UIs also accept
+// kanji-only text.
 func suggestionMatchesLocale(text, locale string) bool {
-	script := textScript(text)
-	if script == "" || script == "latin" {
+	lang := suggestionLangKey(locale)
+	switch script := textScript(text); script {
+	case "":
 		return true
+	case "latin":
+		return lang == "en" || !looksLikeEnglishSentence(text)
+	case "vi", "latin-ext":
+		return lang == "vi"
+	case "zh":
+		return lang == "zh" || lang == "zh-TW" || lang == "ja"
+	default: // ja, ko, ru
+		return lang == script
 	}
-	switch suggestionLangKey(locale) {
-	case "vi":
-		return script == "vi"
-	case "zh", "zh-TW":
-		return script == "zh"
-	case "ja":
-		return script == "ja" || script == "zh"
-	case "ko":
-		return script == "ko"
-	case "ru":
-		return script == "ru"
-	default:
-		return false
+}
+
+var englishFunctionWords = map[string]bool{
+	"what": true, "which": true, "who": true, "whom": true, "whose": true, "why": true,
+	"when": true, "where": true, "how": true, "is": true, "are": true, "was": true,
+	"were": true, "do": true, "does": true, "did": true, "the": true, "a": true,
+	"an": true, "of": true, "for": true, "on": true, "in": true, "to": true,
+	"at": true, "with": true, "your": true, "you": true, "can": true, "should": true,
+	"use": true, "used": true, "and": true, "or": true, "from": true, "by": true,
+	"this": true, "that": true, "there": true, "it": true, "its": true, "be": true,
+}
+
+// looksLikeEnglishSentence reports whether ASCII text reads as an English
+// phrase rather than a bare name: at least two distinct function words.
+func looksLikeEnglishSentence(text string) bool {
+	seen := map[string]bool{}
+	for _, w := range strings.FieldsFunc(strings.ToLower(text), func(r rune) bool {
+		return !unicode.IsLetter(r)
+	}) {
+		if englishFunctionWords[w] {
+			seen[w] = true
+		}
 	}
+	return len(seen) >= 2
 }
 
 var (
@@ -154,5 +182,11 @@ func readableWikiTitle(title string) string {
 	t = leadingIndex.ReplaceAllString(t, "")
 	t = tripleDash.ReplaceAllString(t, " — ")
 	t = strings.NewReplacer("-", " ", "_", " ").Replace(t)
-	return strings.Join(strings.Fields(t), " ")
+	t = strings.Join(strings.Fields(t), " ")
+	// "agency agents — A complete AI agency" → "agency agents": the tagline
+	// after the dash is a description, not part of the topic name.
+	if name, _, ok := strings.Cut(t, " — "); ok && strings.TrimSpace(name) != "" {
+		t = strings.TrimSpace(name)
+	}
+	return t
 }
