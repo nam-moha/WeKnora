@@ -23,6 +23,14 @@ func Language() gin.HandlerFunc {
 	envLang := types.EnvLanguage()
 
 	return func(c *gin.Context) {
+		// The UI locale is always recorded separately so user-facing text
+		// (e.g. suggestion chips) follows the menu language even when
+		// WEKNORA_LANGUAGE pins the document-processing language.
+		if uiLang := parseFirstLanguageTag(c.GetHeader("Accept-Language")); uiLang != "" {
+			c.Set(types.UILanguageContextKey.String(), uiLang)
+			c.Request = c.Request.WithContext(context.WithValue(c.Request.Context(), types.UILanguageContextKey, uiLang))
+		}
+
 		// 1. WEKNORA_LANGUAGE env takes precedence (deployment-level document language)
 		if envLang != "" {
 			c.Set(types.LanguageContextKey.String(), envLang)

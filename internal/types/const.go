@@ -74,6 +74,9 @@ const (
 	WikiShrinkAllowedContextKey ContextKey = "WikiShrinkAllowed"
 	// LanguageContextKey is the context key for user language preference (e.g. "zh-CN", "en-US")
 	LanguageContextKey ContextKey = "Language"
+	// UILanguageContextKey carries the caller's UI locale from Accept-Language,
+	// even when WEKNORA_LANGUAGE pins LanguageContextKey for document work.
+	UILanguageContextKey ContextKey = "UILanguage"
 	// EmbedVisitorContextKey is the anonymous visitor id for embed OAuth isolation.
 	EmbedVisitorContextKey ContextKey = "EmbedVisitorID"
 	// EmbedChannelContextKey stores the authenticated embed channel (an

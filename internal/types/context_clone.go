@@ -77,6 +77,7 @@ var contextCloneAcrossDetach = map[ContextKey]bool{
 	LoggerContextKey:        true,
 	RequestIDContextKey:     true,
 	LanguageContextKey:      true,
+	UILanguageContextKey:    true,
 	LangfuseTraceContextKey: true,
 
 	// The agent-level opt-out from long-term memory. Recall is gated inside

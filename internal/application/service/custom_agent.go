@@ -3,6 +3,7 @@ package service
 import (
 	"context"
 	"errors"
+	"fmt"
 	"math/rand"
 	"strings"
 	"time"
@@ -757,7 +758,7 @@ func (s *customAgentService) getSuggestedQuestions(
 			if err != nil || meta == nil || meta.StandardQuestion == "" {
 				continue
 			}
-			if seen[meta.StandardQuestion] {
+			if seen[meta.StandardQuestion] || !suggestionMatchesLocale(meta.StandardQuestion, types.UILanguageFromContext(ctx)) {
 				continue
 			}
 			seen[meta.StandardQuestion] = true
@@ -791,7 +792,7 @@ func (s *customAgentService) getSuggestedQuestions(
 				continue
 			}
 			q := questions[0]
-			if q == "" || seen[q] {
+			if q == "" || seen[q] || !suggestionMatchesLocale(q, types.UILanguageFromContext(ctx)) {
 				continue
 			}
 			seen[q] = true
@@ -827,7 +828,7 @@ func (s *customAgentService) getSuggestedQuestions(
 				})
 				continue
 			}
-			locale := types.LanguageFromContextOrDefault(ctx)
+			locale := types.UILanguageFromContext(ctx)
 			for _, page := range wikiPages {
 				q := wikiSuggestionFromPage(page, locale)
 				if q == "" || seen[q] {
@@ -1111,17 +1112,18 @@ func wikiSuggestionFromPage(page *types.WikiPage, locale string) string {
 	if title == "" {
 		return ""
 	}
+	if page.PageType == types.WikiPageTypeSummary {
+		title = readableWikiTitle(title)
+	}
+	if title == "" || !suggestionMatchesLocale(title, locale) {
+		return ""
+	}
+	tpl := suggestionTemplatesFor(locale)
 	switch page.PageType {
 	case types.WikiPageTypeConcept:
-		if isEnglishLocale(locale) {
-			return "What is " + title + "?"
-		}
-		return "什么是" + title + "？"
+		return fmt.Sprintf(tpl.concept, title)
 	case types.WikiPageTypeEntity, types.WikiPageTypeSummary:
-		if isEnglishLocale(locale) {
-			return "Tell me about " + title
-		}
-		return "介绍一下" + title
+		return fmt.Sprintf(tpl.about, title)
 	default:
 		return title
 	}
@@ -1237,14 +1239,4 @@ func (s *customAgentService) groupKBIDsByEffectiveTenant(
 		out[kb.TenantID] = append(out[kb.TenantID], kbID)
 	}
 	return out
-}
-
-// isEnglishLocale reports whether the locale string is an English variant.
-// Unknown / empty locales fall back to Chinese, matching the product default.
-func isEnglishLocale(locale string) bool {
-	switch locale {
-	case "en-US", "en", "en-GB":
-		return true
-	}
-	return false
 }

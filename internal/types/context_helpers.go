@@ -416,6 +416,17 @@ func ResolveLanguageName(ctx context.Context, locale string) string {
 	return LanguageLocaleName(ResolveLanguage(ctx, locale))
 }
 
+// UILanguageFromContext returns the locale the caller's UI is displayed in
+// (Accept-Language), falling back to LanguageFromContextOrDefault. Use it for
+// text shown back to the user, such as suggestion chips, rather than for
+// document-processing work that WEKNORA_LANGUAGE may pin.
+func UILanguageFromContext(ctx context.Context) string {
+	if v, ok := ctx.Value(UILanguageContextKey).(string); ok && strings.TrimSpace(v) != "" {
+		return strings.TrimSpace(v)
+	}
+	return LanguageFromContextOrDefault(ctx)
+}
+
 // LanguageFromContextOrDefault returns the locale carried by ctx, falling back
 // to DefaultLanguage(). Use it when persisting a locale onto an async task
 // payload so downstream workers never inherit an empty language.
