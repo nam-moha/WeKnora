@@ -5879,11 +5879,14 @@ export default {
         sourceFilterSelectAll: 'Chọn tất cả / Bỏ chọn tất cả (bao gồm mọi kết quả khớp)',
         sourceFilterOverflowRecent: 'Có nhiều tài liệu, chỉ hiển thị {cap} tài liệu gần nhất. Hãy nhập từ khóa để tìm chính xác',
         sourceFilterOverflowHits: 'Có {total} tài liệu khớp, chỉ hiển thị {cap} tài liệu đầu tiên. Hãy thu hẹp từ khóa trước khi chọn tất cả',
+        sourcePage: 'Trang {page}',
         attr: {
           builtin_caption: 'Mô tả',
           builtin_caption_description: 'Mô tả ảnh do Model tạo',
           builtin_ocr_text: 'Văn bản OCR',
           builtin_ocr_text_description: 'Chữ được OCR trích xuất từ ảnh',
+          builtin_page: 'Trang tài liệu',
+          builtin_page_description: 'Nhóm theo tài liệu nguồn, rồi sắp xếp theo trang PDF; ảnh không rõ trang xếp cuối mỗi tài liệu.',
           builtin_created_at: 'Thời gian tạo',
           builtin_created_at_description: 'Thời gian tạo Chunk tài liệu chứa ảnh',
           builtin_updated_at: 'Thời gian cập nhật',
@@ -7290,9 +7293,16 @@ export default {
     statsIndexedMessages: 'Tin nhắn đã lập chỉ mục',
     statsNotConfigured: 'Chưa cấu hình lập chỉ mục tin nhắn',
     statsNotConfiguredDesc: 'Bật và chọn một embedding model để bắt đầu tự động lập chỉ mục tin nhắn hội thoại',
+    clearIndexLabel: 'Xoá chỉ mục tin nhắn',
+    clearIndexDescription: 'Tạm dừng lập chỉ mục và xoá chỉ mục tìm kiếm tin nhắn của workspace này. Hội thoại và tin nhắn vẫn được giữ nguyên.',
+    clearIndexButton: 'Xoá chỉ mục',
+    clearIndexConfirm: 'Xoá chỉ mục tin nhắn cho mọi người trong workspace này? Việc lập chỉ mục sẽ bị tạm dừng. Hội thoại và tin nhắn không bị xoá, nhưng tin nhắn cũ sẽ không được tự động lập chỉ mục lại. Không thể hoàn tác.',
     toasts: {
       saveSuccess: 'Đã lưu cấu hình quản lý tin nhắn',
-      saveFailed: 'Không thể lưu cấu hình: {message}'
+      saveFailed: 'Không thể lưu cấu hình: {message}',
+      loadFailed: 'Không tải được cấu hình hoặc thống kê chỉ mục tin nhắn',
+      clearSuccess: 'Đã xoá chỉ mục tin nhắn. Việc lập chỉ mục sẽ tạm dừng cho đến khi bạn bật lại.',
+      clearFailed: 'Chưa xoá xong chỉ mục. Hãy kiểm tra trạng thái hiện tại và thử lại: {message}'
     }
   },
   vectorStoreSettings: {
